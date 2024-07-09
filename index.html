@@ -10,9 +10,17 @@
   <div id="uploadedImages"></div>
 
   <script>
-    // Fetch uploads.json from server
-    fetch('uploads.json')
-      .then(response => response.json())
+    const owner = 'lan5555'; // Replace with your GitHub username or organization
+    const repo = 'FashionTest'; // Replace with your GitHub repository name
+
+    // Fetch uploads.json from GitHub repository
+    fetch(`https://raw.githubusercontent.com/${owner}/${repo}/main/uploads.json`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => {
         const uploadedImagesDiv = document.getElementById('uploadedImages');
         uploadedImagesDiv.innerHTML = '';
@@ -20,8 +28,6 @@
         data.forEach(image => {
           const imgElement = document.createElement('img');
           imgElement.src = `https://raw.githubusercontent.com/${owner}/${repo}/main/uploads/${image.fileName}`;
-          document.h1.innerHTML += `https://raw.githubusercontent.com/${owner}/${repo}/main/uploads/${image.fileName}`;
-        
           imgElement.alt = image.fileName; // Optional: Set alt attribute
           uploadedImagesDiv.appendChild(imgElement);
         });
