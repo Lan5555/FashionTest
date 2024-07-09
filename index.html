@@ -20,6 +20,8 @@
         data.forEach(image => {
           const imgElement = document.createElement('img');
           imgElement.src = `https://raw.githubusercontent.com/${owner}/${repo}/main/uploads/${image.fileName}`;
+          document.h1.innerHTML += `https://raw.githubusercontent.com/${owner}/${repo}/main/uploads/${image.fileName}`;
+        
           imgElement.alt = image.fileName; // Optional: Set alt attribute
           uploadedImagesDiv.appendChild(imgElement);
         });
