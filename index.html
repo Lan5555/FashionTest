@@ -11,7 +11,7 @@
 
   <script>
     // Fetch uploads.json from server
-    fetch('/uploads.json')
+    fetch('uploads.json')
       .then(response => response.json())
       .then(data => {
         const uploadedImagesDiv = document.getElementById('uploadedImages');
