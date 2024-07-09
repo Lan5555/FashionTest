@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uploaded Files</title>
+</head>
+<body>
+  <h1>Uploaded Files</h1>
+  <div id="uploadedImages"></div>
+
+  <script>
+    // Fetch uploads.json from server
+    fetch('/uploads.json')
+      .then(response => response.json())
+      .then(data => {
+        const uploadedImagesDiv = document.getElementById('uploadedImages');
+        uploadedImagesDiv.innerHTML = '';
+
+        data.forEach(image => {
+          const imgElement = document.createElement('img');
+          imgElement.src = `https://raw.githubusercontent.com/${owner}/${repo}/main/uploads/${image.fileName}`;
+          imgElement.alt = image.fileName; // Optional: Set alt attribute
+          uploadedImagesDiv.appendChild(imgElement);
+        });
+      })
+      .catch(error => {
+        console.error('Failed to fetch uploaded images:', error);
+      });
+  </script>
+</body>
+</html>
